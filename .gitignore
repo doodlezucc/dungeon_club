@@ -5,6 +5,7 @@
 # Conventional directory for build outputs
 build/
 logs/
+DungeonClub_Data
 
 # Directory created by dartdoc
 doc/api/

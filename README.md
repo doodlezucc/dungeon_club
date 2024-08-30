@@ -1,3 +1,6 @@
+![GitHub License](https://img.shields.io/github/license/doodlezucc/dungeonclub) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/doodlezucc/dungeonclub/total) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/doodlezucc/dungeonclub/deploy-images.yaml)
+
+ 
  # Dungeon Club - Virtual Tabletop <img align="right" src="web/images/icon.png" alt="Icon" height=96 />
 
 An online platform to gather and play Dungeons & Dragons, Call of Cthulu, Pathfinder and more.
@@ -53,7 +56,7 @@ Changes to the source code are reflected at different times depending on what pa
 - **Website Stylesheet** - after refreshing the website or by pressing <kbd>Shift</kbd>+<kbd>R</kbd> on the website (not available on Firefox).
 
 ## Self-Hosting
-You can find the official public version of Dungeon Club at https://dungeonclub.net. In case you want to host a local server on your machine, there are two ways to achieve this.
+You can find the official public version of Dungeon Club at https://dungeonclub.net. In case you want to host a local server on your machine, there are three ways to achieve this.
 
 ### Pre-Compiled Releases
 
@@ -71,6 +74,32 @@ There's no difference in using a *mock account* vs. a regular *email-verified ac
 Upon a successful login, you're presented with the ability to create and manage your own campaigns.
 
 If you open the server port (`7070` by default) in your network, outside players should be able to interact with your locally hosted website by accessing your IP address.
+
+### Docker
+A new Docker container is also created for each new release.  The container can be started directly in the CLI or with Docker-Compose.
+
+CLI
+```bash
+# Start the Container
+docker run -v <path-to-data>:/app -p <your-port>:7070 -e ENABLE_MUSIC_PLAYER=false ghcr.io/doodlezucc/dungeonclub:latest
+```
+
+Docker-Compose
+```yml
+version 2.1
+
+services:
+  dungeonclub:
+    image: ghcr.io/doodlezucc/dungeonclub:latest
+    container_name: dungeonclub
+    ports:
+      - 7070:7070
+    restart: always
+    environment:
+      - ENABLE_MUSIC_PLAYER=false
+    volumes:
+      - <path-to-data>:/app
+```
 
 ### Custom Build
 Apart from the official list of executable releases, you can also build Dungeon Club yourself.

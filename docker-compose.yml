@@ -1,0 +1,12 @@
+version: "2.1"
+services:
+  dungeonclub:
+    image: dungeonclub:latest
+    container_name: dungeonclub
+    environment:
+      - ENABLE_MUSIC_PLAYER=false
+    volumes:
+      - ./DungeonClub_Data:/app
+    ports:
+      - 7072:7070
+    restart: unless-stopped
