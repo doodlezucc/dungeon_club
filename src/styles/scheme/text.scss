@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive&family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Fira+Mono&display=swap');
+
+%font-paragraph {
+	font-family: 'Lato', sans-serif;
+}
+
+%font-heading {
+	font-family: 'Recursive', serif;
+	font-weight: normal;
+	margin: 0;
+}
+
+body {
+	@extend %font-paragraph;
+}
+
+h1,
+h2,
+h3 {
+	@extend %font-heading;
+}
+
+.subtitle {
+	color: var(--color-shade-pale);
+}
+
+pre {
+	font-family: 'Fira Mono', monospace;
+}
+
+.code {
+	font-size: 1em;
+	background-color: var(--color-shade-darkest);
+	outline: 0.25em solid var(--color-shade-darkest);
+	border-radius: 4px;
+}
+
+.error {
+	color: var(--color-bad);
+}

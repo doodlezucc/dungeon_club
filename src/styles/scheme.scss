@@ -1,2 +1,35 @@
-@use 'scheme/colors.scss';
-@use 'scheme/fonts.scss';
+@use 'scheme/colors' as *;
+@use 'scheme/text' as *;
+
+@mixin rounded() {
+	border-radius: 8px;
+}
+
+.container {
+	@include rounded();
+	padding: 1em;
+	display: inline-block;
+	background-color: var(--color-container);
+
+	&[data-padding='big'] {
+		padding: 3em;
+	}
+
+	&[data-margin='big'] {
+		margin: 3em;
+	}
+
+	&[data-variant='elevated'] {
+		box-shadow: 0 0.5em 1em #000a;
+	}
+
+	&[data-variant='outlined'] {
+		border: 2px solid var(--color-separator);
+	}
+}
+
+.tooltip {
+	@include rounded();
+	background-color: var(--color-background);
+	padding: 0.5em 0.8em;
+}

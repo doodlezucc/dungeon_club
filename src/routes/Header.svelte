@@ -1,5 +1,5 @@
 <script>
-	import Content from './Content.svelte';
+	import { Content } from 'components';
 </script>
 
 <header>
@@ -10,9 +10,9 @@
 
 <style>
 	header {
-		background-color: var(--color-dark);
+		background-color: var(--color-container);
 		padding: 1em 0;
-		border-bottom: 3px solid var(--color-light);
+		border-bottom: 3px solid var(--color-separator);
 	}
 
 	h1 {

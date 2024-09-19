@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"name": "database",
+			"path": "prisma"
+		},
+		{
+			"name": "lib",
+			"path": "src/lib/logic"
+		},
+		{
+			"name": "routes",
+			"path": "src/routes"
+		},
+		{
+			"name": "style",
+			"path": "src/styles"
+		},
+		{
+			"name": "components",
+			"path": "src/lib/components"
+		},
+		{
+			"name": "packages",
+			"path": "src/lib/packages"
+		},
+		{
+			"name": "<root>",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

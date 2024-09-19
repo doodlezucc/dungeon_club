@@ -1,5 +1,5 @@
 {
-	"name": "svelte-it",
+	"name": "dungeonclub",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -10,27 +10,51 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"generate": "prisma generate",
+		"hardsync": "prisma db push",
+		"postinstall": "npm run generate"
 	},
 	"devDependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.5.2",
+		"@fortawesome/free-brands-svg-icons": "^6.5.2",
+		"@fortawesome/free-solid-svg-icons": "^6.5.2",
+		"@fortawesome/svelte-fontawesome": "^0.2.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.7",
+		"@types/lodash": "^4.17.7",
+		"@types/mime-types": "^2.1.4",
+		"@types/mjml": "^4.7.4",
+		"@types/node": "^20.14.9",
+		"@types/nodemailer": "^6.4.15",
+		"@types/ws": "8.5.5",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
+		"prisma": "^5.16.2",
 		"sass": "^1.77.6",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
+		"svelte-time": "^0.9.0",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0-alpha.20",
-		"vite": "^5.0.3",
+		"vite": "^5.0.11",
 		"vitest": "^1.2.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^5.16.2",
+		"lodash": "^4.17.21",
+		"mime-types": "^2.1.35",
+		"mjml": "^5.0.0-alpha.4",
+		"nodemailer": "^6.9.14",
+		"normalize-email": "1.1.1",
+		"ws": "^8.13.0"
+	}
 }

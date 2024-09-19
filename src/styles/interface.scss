@@ -1,0 +1,156 @@
+@use 'scheme.scss' as *;
+
+@function cubic-out($duration, $aria-duration) {
+	@return $duration cubic-bezier(0.165, 0.84, 0.44, 1), outline $aria-duration;
+}
+
+%transitions-playful {
+	transition: cubic-out(0.5s, 0.3s);
+
+	&:hover {
+		transition: cubic-out(0.2s, 0.1s);
+	}
+
+	&:active,
+	&:focus-visible {
+		transition: cubic-out(0.05s, 0.1s);
+	}
+}
+
+button {
+	@extend %transitions-playful;
+	@include rounded();
+
+	outline: 0.25em solid transparent;
+	box-sizing: border-box;
+
+	padding: 0.8em 2.5em;
+	background-color: var(--color-button);
+	color: var(--color-button-text);
+	border: var(--border-button);
+
+	display: block;
+	font: inherit;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 900;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	letter-spacing: 0.08em;
+
+	&:disabled {
+		background-color: var(--color-button-disabled);
+		color: var(--color-button-disabled-text);
+	}
+
+	&:not(:disabled) {
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--color-button-hover);
+		}
+
+		&:active,
+		&:focus-visible,
+		&.drag-over {
+			outline-color: var(--color-button-active-outline);
+		}
+	}
+
+	&.icon {
+		$size: 1.5em;
+
+		font-size: 20px;
+		padding: 0;
+		width: $size;
+		height: $size;
+		border-radius: 50%;
+		outline-width: 0.15em;
+		outline-offset: -1px;
+		margin: 5px;
+
+		&.disable-margin {
+			margin: 0;
+		}
+
+		&.inline {
+			font-size: inherit;
+
+			&,
+			&:enabled:hover,
+			&:enabled:active {
+				background-color: transparent;
+				outline: none;
+			}
+		}
+
+		&:disabled,
+		&:not(:hover, :active) {
+			color: inherit;
+		}
+
+		&:enabled:hover {
+			background-color: var(--color-button-hover);
+			outline-color: var(--color-button-hover);
+			outline-width: 0.5em;
+		}
+		&:enabled:active {
+			background-color: var(--color-button-active);
+			outline-color: var(--color-button-active);
+		}
+
+		&:focus-visible {
+			outline: 0.15em solid var(--color-button-active-outline);
+			outline-offset: 0.25em;
+		}
+	}
+}
+
+[role='button']:not(.custom) {
+	@extend button;
+}
+
+input {
+	@extend %transitions-playful;
+	@include rounded();
+
+	padding: 0.5em 0.8em;
+	border: 2px solid var(--color-input-outline);
+	box-sizing: border-box;
+
+	background-color: var(--color-input-background);
+	color: var(--color-text);
+
+	font: inherit;
+	min-width: 300px;
+
+	&:hover {
+		border-color: var(--color-input-hover-outline);
+	}
+}
+
+@mixin raise($strength, $max: 6px, $padding-horizontal: 2.5em, $padding-vertical: 0.8em) {
+	box-shadow: 0 (-$strength * $max) 0 #0005 inset;
+	margin-top: $max * (1 - $strength);
+
+	padding: $padding-vertical $padding-horizontal calc($padding-vertical + $strength * $max);
+}
+
+.raised:not(.custom) {
+	@extend %transitions-playful;
+	@include raise(1);
+
+	&:not(:disabled):hover {
+		@include raise(0.5);
+	}
+
+	&:not(:disabled):active,
+	&:disabled,
+	&.drag-over {
+		@include raise(0.25);
+	}
+}
+
+.list-tile {
+	@extend %transitions-playful;
+}

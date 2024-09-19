@@ -2,17 +2,92 @@ body {
 	--color-primary: #ffb77c;
 	--color-primary-disabled: hsl(39, 60%, 60%);
 
-	--color-dark: #38312c;
-	--color-light: #ffffff;
-	--color-light2: #fff1d6;
-
-	--color-background: #1a1717;
-
-	--color-button-text: #ddd;
-	--color-selected: #ccc;
-	--color-header: #2e2926;
-	--color-separator: #614f4a;
+	--color-shade-darkest: #1a1717;
+	--color-shade-darker: #2b2420;
+	--color-shade-dark: #38312c;
+	--color-shade-mid: #8d7765;
+	--color-shade-pale: #c4b5a4;
+	--color-shade-light: #ffffff;
 
 	--color-good: #62ffa9;
 	--color-bad: #ff7676;
+}
+
+body {
+	--color-modal-background: #0003;
+
+	--color-background: var(--color-shade-darkest);
+	--color-text: var(--color-shade-light);
+	--color-text-pale: var(--color-shade-pale);
+	--color-on-primary: var(--color-shade-darker);
+
+	--color-container: var(--color-shade-dark);
+	--color-separator: var(--color-shade-pale);
+
+	--color-list-tile: var(--color-background);
+	--color-list-tile-hover: var(--color-shade-darker);
+	--color-list-tile-selected: var(--color-shade-mid);
+
+	--color-button: var(--color-shade-darker);
+	--color-button-hover: var(--color-shade-darkest);
+	--color-button-active-outline: var(--color-shade-pale);
+	--color-button-disabled: var(--color-shade-dark);
+	--color-button-text: var(--color-text);
+	--color-button-disabled-text: var(--color-shade-dark);
+	--border-button: 0.15em solid var(--color-shade-mid);
+
+	--action-color-button: var(--color-primary);
+	--action-color-button-hover: var(--color-shade-mid);
+	--action-color-button-active-outline: var(--color-shade-light);
+	--action-color-button-disabled: var(--color-shade-mid);
+	--action-color-button-text: var(--color-on-primary);
+	--action-color-button-disabled-text: var(--color-shade-darker);
+	--action-border-button: none;
+
+	--icon-color-button: transparent;
+	--icon-color-button-hover: var(--color-shade-mid);
+	--icon-color-button-active-outline: var(--color-shade-light);
+	--icon-color-button-disabled: var(--color-shade-dark);
+	--icon-color-button-text: var(--color-text);
+	--icon-color-button-disabled-text: var(--color-shade-dark);
+	--icon-border-button: none;
+
+	--color-input-background: var(--color-shade-darkest);
+	--color-input-outline: var(--color-shade-mid);
+	--color-input-hover-outline: var(--color-shade-light);
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+a {
+	color: var(--color-text);
+	opacity: 0.8;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+button.action {
+	--color-button: var(--action-color-button);
+	--color-button-hover: var(--action-color-button-hover);
+	--color-button-active-outline: var(--action-color-button-active-outline);
+	--color-button-disabled: var(--action-color-button-disabled);
+	--color-button-text: var(--action-color-button-text);
+	--color-button-disabled-text: var(--action-color-button-disabled-text);
+	--border-button: var(--action-border-button);
+}
+
+button.icon {
+	--color-button: var(--icon-color-button);
+	--color-button-hover: var(--icon-color-button-hover);
+	--color-button-active: var(--color-shade-pale);
+	--color-button-active-outline: var(--icon-color-button-active-outline);
+	--color-button-disabled: var(--icon-color-button-disabled);
+	--color-button-text: var(--icon-color-button-text);
+	--color-button-disabled-text: var(--icon-color-button-disabled-text);
+	--border-button: var(--icon-border-button);
 }

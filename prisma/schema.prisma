@@ -1,0 +1,201 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SystemSetting {
+  key       String @id
+  jsonValue String
+}
+
+model Asset {
+  id String @id @default(uuid())
+
+  path     String
+  mimeType String
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  campaignId String
+
+  avatarOfTokenTemplates TokenTemplate[]
+  avatarOfTokens         Token[]
+  mapImageOfBoards       Board[]
+}
+
+model Crypt {
+  hash       String @id
+  salt       String
+  iterations Int
+  keyLength  Int
+  digest     String
+
+  Account Account?
+}
+
+model Account {
+  emailHash             String   @id
+  encryptedPassword     Crypt    @relation(fields: [encryptedPasswordHash], references: [hash], onDelete: Cascade)
+  encryptedPasswordHash String   @unique
+  createdAt             DateTime @default(now())
+
+  tokenInfo AccessToken?
+
+  campaigns          Campaign[]
+  campaignIdsOrdered String[]
+}
+
+model AccessToken {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  account      Account @relation(fields: [accountEmail], references: [emailHash], onDelete: Cascade)
+  accountEmail String  @unique
+}
+
+model Campaign {
+  id         String   @id
+  owner      Account  @relation(fields: [ownerEmail], references: [emailHash], onDelete: Cascade)
+  ownerEmail String
+  name       String
+  createdAt  DateTime @default(now())
+
+  assets           Asset[]
+  playerCharacters PlayerCharacter[]
+  templates        TokenTemplate[]
+  boards           Board[]
+  boardIdsOrdered  String[]
+  selectedBoardId  String?
+
+  audioSfxWeather SfxWeather @default(NONE)
+  audioSfxCrowd   SfxCrowd   @default(NONE)
+
+  audioEffectInside Float @default(0)
+}
+
+model PlayerCharacter {
+  id String @id @default(uuid())
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId String
+
+  tokenTemplate   TokenTemplate @relation(fields: [tokenTemplateId], references: [id], onDelete: Cascade)
+  tokenTemplateId String        @unique
+}
+
+model TokenTemplate {
+  id String @id @default(uuid())
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId String
+
+  player PlayerCharacter?
+
+  instances Token[]
+
+  //
+  // Common token properties
+
+  name               String
+  size               Int     @default(1)
+  initiativeModifier Int     @default(0)
+  avatar             Asset?  @relation(fields: [avatarId], references: [id], onDelete: SetNull)
+  avatarId           String?
+}
+
+model Token {
+  id String @id @default(uuid())
+
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId String
+
+  template   TokenTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  templateId String?
+
+  //
+  // Common token properties (null = "inherit from template")
+
+  name               String?
+  size               Int?
+  initiativeModifier Int?
+  avatar             Asset?  @relation(fields: [avatarId], references: [id], onDelete: SetNull)
+  avatarId           String?
+
+  //
+  // Instance token properties
+
+  x               Float
+  y               Float
+  invisible       Boolean          @default(false)
+  conditions      Int[]
+  initiativeEntry InitiativeEntry?
+}
+
+model Board {
+  id String @id @default(uuid())
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId String
+
+  name String @default("Untitled Board")
+
+  mapImage   Asset  @relation(fields: [mapImageId], references: [id], onDelete: Cascade)
+  mapImageId String
+
+  gridCellsPerRow   Int      @default(20)
+  gridPaddingTop    Float    @default(0)
+  gridPaddingBottom Float    @default(0)
+  gridPaddingLeft   Float    @default(0)
+  gridPaddingRight  Float    @default(0)
+  gridType          GridType @default(SQUARE)
+
+  tokens          Token[]
+  initiativeOrder InitiativeOrder?
+}
+
+enum GridType {
+  SQUARE
+  HEX_HORIZONTAL
+  HEX_VERTICAL
+  NONE
+}
+
+model InitiativeOrder {
+  id Int @id @default(autoincrement())
+
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId String @unique
+
+  entries InitiativeEntry[]
+}
+
+model InitiativeEntry {
+  order   InitiativeOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId Int
+
+  token   Token  @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+  tokenId String @unique
+
+  roll Int
+}
+
+enum SfxWeather {
+  NONE
+  RAIN
+  STORM
+}
+
+enum SfxCrowd {
+  NONE
+  TAVERN
+  MARKETPLACE
+}

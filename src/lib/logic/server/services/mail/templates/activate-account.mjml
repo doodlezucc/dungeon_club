@@ -1,0 +1,38 @@
+<mjml>
+	<mj-head>
+		<mj-attributes>
+			<mj-all font-family="Roboto, Arial, Helvetica, sans-serif" />
+		</mj-attributes>
+	</mj-head>
+	<mj-body background-color="#eeeeee" width="640px">
+		<mj-wrapper padding="20px">
+			<mj-section background-color="#ffffff">
+				<mj-column>
+					<mj-image alt="Dungeon Club Logo" width="32px" src="cid:logo" />
+					<mj-text align="center" font-size="20px">Confirm your email address</mj-text>
+					<mj-divider border-color="#dddddd" />
+
+					<!-- <Content> -->
+					<mj-text>
+						Your <b>Dungeon Club</b> account is on its way to existence! To activate it, please
+						enter this code on the website or click the following link to complete verification.
+					</mj-text>
+
+					<mj-text align="center">
+						<h2>${activationCode}</h2>
+						<a href="${activationUrl}">${activationUrl}</a>
+					</mj-text>
+
+					<mj-text>
+						If you weren't trying to sign up, you can safely ignore this email. Your address is not
+						stored until you actually get an account.
+					</mj-text>
+					<!-- </Content> -->
+
+					<mj-text> Have fun playing! </mj-text>
+					<mj-text color="#666666" padding-top="0"> » Your local dungeon mailman </mj-text>
+				</mj-column>
+			</mj-section>
+		</mj-wrapper>
+	</mj-body>
+</mjml>
