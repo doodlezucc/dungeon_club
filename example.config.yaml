@@ -1,6 +1,6 @@
 storage_megabytes_per_campaign: 500
-prefabs_per_campaign: 20
-scenes_per_campaign: 20
+prefabs_per_campaign: 50
+scenes_per_campaign: 35
 maps_per_campaign: 10
 campaigns_per_account: 10
 # database_path: .
